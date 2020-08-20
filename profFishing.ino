@@ -63,24 +63,26 @@ void loop() {
 
   lcd.print(“Altura || Oscila”);
   lcd.setCursor(0, 1);
-  lcd.print(currentPosition()/3000);
+  lcd.print((currentPosition()/200)*6);
   lcd.setCursor(0, 8);
   lcd.print(“||”);
   lcd.setCursor(0, 12);
-  if (OSC_status == 0){
+  
+  if (variable_buttonState == 1){
       lcd.print(“ON”);
-      else(){
-          lcd.print(“OFF”);
       }
-      
+  else(){
+      lcd.print(“OFF”);
+      }
   }
+  
   delay (500);
 
     if(buttonUP == LOW){
-      stepper.move(6000);
+      stepper.move(600);
     }
     else if(buttonDN == LOW) //200 pasos 1 vuelta (calcular cuantas vueltas para medio metro) 
-      steper.move(-6000);
+      steper.move(-600);
     }  
   delay(50);
 }
@@ -102,15 +104,13 @@ delay(300);
 
     if (variable_buttonState == HIGH) {
         // turn led on & oscilate motor
-        OSC_status = 1;
-        stepper.move(-5000);
+        stepper.move(-1200);
         delay(500);
-        stepper.move(5000);
+        stepper.move(1200);
         digitalWrite(ledPin, HIGH);
     }
     else {
         // turn LED off:
-        OSC_status = 0
         digitalWrite(ledPin, LOW);
     }
 
