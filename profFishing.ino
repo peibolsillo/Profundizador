@@ -36,9 +36,9 @@ AccelStepper stepper = AccelStepper(motorInterfaceType, stepPin, dirPin);
 void setup() {
   
   // Indicar a la libreria que tenemos conectada una pantalla de 16x2
-  lcd.begin(16, 2);
+  lcd.init();
   // Mover el cursor a la primera posición de la pantalla (0, 0)
-  lcd.home ();
+  lcd.backlight();
   // Imprimir “Hola Mundo” en la primera linea
   lcd.print("PROFUNDIZADOR");
   // Mover el cursor a la segunda linea (1) primera columna
