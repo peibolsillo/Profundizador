@@ -20,10 +20,14 @@ const byte buttonDN = 7;
 const byte buttonOSC= 8;
 const byte ledPin   = 12;
 
+// set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27,16,2);
+
 // Las variables cambiarán:
 byte buttonState = 0; // variable para LECTURA del estado interruptor OSC
 byte variable_buttonState = 0; // variable para ALMACENAR el estado del interriptor OSC
 byte OSC_status = 0;
+int stepCount = 0;
 
 
 // Create a new instance of the AccelStepper class:
@@ -36,11 +40,11 @@ void setup() {
   // Mover el cursor a la primera posición de la pantalla (0, 0)
   lcd.home ();
   // Imprimir “Hola Mundo” en la primera linea
-  lcd.print(“PROFUNDIZADOR”);
+  lcd.print("PROFUNDIZADOR");
   // Mover el cursor a la segunda linea (1) primera columna
   lcd.setCursor ( 0, 1 );
   // Imprimir otra cadena en esta posicion
-  lcd.print(“PABLITO 1.0”);
+  lcd.print("PABLITO 1.0");
   // Esperar un segundo
   delay(1000);
     
@@ -50,6 +54,7 @@ void setup() {
   pinMode(buttonOSC, INPUT);
   
   // Set the maximum speed in steps per second:
+	
   stepper.setMaxSpeed(2000);
   // Set the current position to 0:
   stepper.setCurrentPosition(0);
@@ -58,10 +63,11 @@ void loop() {
     stepCount = currentPosition(); //guarda la posicion actual 200 pasos 1 vuelta y 1 vuelta = 15 cm/ 1,00 m = XX vueltas
     
   // Actualizar la pantalla completa cada segundo
+		
   lcd.clear();
   // Imprimir encabezado
 
-  lcd.print(“Altura || Oscila”);
+  lcd.print("Altura || Oscila");
   lcd.setCursor(0, 1);
   lcd.print((currentPosition()/200)*6);
   lcd.setCursor(0, 8);
@@ -69,10 +75,10 @@ void loop() {
   lcd.setCursor(0, 12);
   
   if (variable_buttonState == 1){
-      lcd.print(“ON”);
+      lcd.print("ON");
       }
   else(){
-      lcd.print(“OFF”);
+      lcd.print("OFF");
       }
   }
   
@@ -85,6 +91,9 @@ void loop() {
       steper.move(-600);
     }  
   delay(50);
+	
+osciladorAltura();
+
 }
 
 void osciladorAltura(){
