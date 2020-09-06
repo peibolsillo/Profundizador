@@ -23,7 +23,6 @@ const byte ledPin   = 12;
 
 
 // Las variables cambiarán:
-const int currentPosition();
 byte buttonState = 0; // variable para LECTURA del estado interruptor OSC
 byte variable_buttonState = 0; // variable para ALMACENAR el estado del interriptor OSC
 byte OSC_status = 0;
@@ -71,7 +70,7 @@ void loop() {
 
   lcd.print("Altura || Oscila");
   lcd.setCursor(0, 1);
-  lcd.print((currentPosition() / 200) * 6);
+  lcd.print((stepper.currentPosition() / 200) * 6);
   lcd.setCursor(0, 8);
   lcd.print(" || ");
   lcd.setCursor(0, 12);
