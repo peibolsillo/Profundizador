@@ -23,7 +23,14 @@ const byte ledPin   = 12;
 
 
 // Las variables cambiarán:
-const int currentPosition();
+
+/*
+   En este punto estás declarando una varriable función, pero nunca la inicializas.
+   Si es una variable --> no debe de tener () y la debes de asignarle un valor antes de usarla o hacer una comprobacion de null 
+   Si es una función --> debes de indicar que quieres que haga cuando se invoque ( antes de invocarlo)
+*/
+//const int currentPosition();
+
 byte buttonState = 0; // variable para LECTURA del estado interruptor OSC
 byte variable_buttonState = 0; // variable para ALMACENAR el estado del interriptor OSC
 byte OSC_status = 0;
@@ -71,7 +78,14 @@ void loop() {
 
   lcd.print("Altura || Oscila");
   lcd.setCursor(0, 1);
-  lcd.print((currentPosition() / 200) * 6);
+  /*
+    Aquí es donde me ha saltado el error.
+    "undefined reference to `currentPosition()'"
+    El error es claro, estás utilizando un método/función que no cotiene nada, el valor de el es "undefined".
+    El simple hecho de comentar esta línea hace que compile sin problemas.
+    Si quieres trazar la posición actual deberás de utilizar un método o variable y asignarle valor o función antes de invocarla.
+  */
+  //lcd.print((currentPosition() / 200) * 6);
   lcd.setCursor(0, 8);
   lcd.print(" || ");
   lcd.setCursor(0, 12);
